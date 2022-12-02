@@ -148,5 +148,6 @@ class Registro:
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.iconbitmap(default="cinemark.ico")
     app = Registro(root)
     root.mainloop()
