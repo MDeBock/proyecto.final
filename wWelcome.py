@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
-class App:
+class Welcome:
     def __init__(self, root):
         #setting title
         root.title("WELCOME TO CINEMARC")
@@ -29,5 +29,5 @@ class App:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = App(root)
+    app = Welcome(root)
     root.mainloop()
