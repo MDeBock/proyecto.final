@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
-class App:
+class Registro:
     def __init__(self, root):
         #setting title
         root.title("REGISTRO")
@@ -148,5 +148,5 @@ class App:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = App(root)
+    app = Registro(root)
     root.mainloop()
