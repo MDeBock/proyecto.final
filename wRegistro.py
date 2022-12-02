@@ -98,6 +98,7 @@ class App:
         GLineEdit_43["justify"] = "center"
         GLineEdit_43["text"] = "Entry"
         GLineEdit_43.place(x=220,y=180,width=320,height=30)
+        GLineEdit_43["show"] = "*"
 
         GLineEdit_210=tk.Entry(root)
         GLineEdit_210["borderwidth"] = "1px"
@@ -107,6 +108,8 @@ class App:
         GLineEdit_210["justify"] = "center"
         GLineEdit_210["text"] = "Entry"
         GLineEdit_210.place(x=220,y=220,width=320,height=30)
+        GLineEdit_210["show"] = "*"
+        
 
         GLabel_170=tk.Label(root)
         ft = tkFont.Font(family='Times',size=10)
