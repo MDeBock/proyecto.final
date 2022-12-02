@@ -4,7 +4,7 @@ import tkinter.font as tkFont
 class Welcome:
     def __init__(self, root):
         #setting title
-        root.title("WELCOME TO CINEMARC")
+        root.title("WELCOME TO CINEMAR")
         #setting window size
         width=500
         height=100
@@ -20,14 +20,15 @@ class Welcome:
         GButton_898["font"] = ft
         GButton_898["fg"] = "#000000"
         GButton_898["justify"] = "center"
-        GButton_898["text"] = "BIENVENIDOS A CINEMARC"       
+        GButton_898["text"] = "BIENVENIDOS A CINEMAR"       
         GButton_898.place(x=0,y=0,width=500,height=100)
         GButton_898["command"] = self.GButton_898_command
 
     def GButton_898_command(self):
-        print("BIENVENIDOS A CINEMARC")
+        print("BIENVENIDOS A CINEMAR")
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.iconbitmap(default="cinemark.ico")
     app = Welcome(root)
     root.mainloop()
