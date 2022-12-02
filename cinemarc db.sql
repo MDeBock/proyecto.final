@@ -3,7 +3,7 @@ CREATE TABLE "Usuarios" (
 	"UserName"	TEXT NOT NULL UNIQUE,
 	"Password"	TEXT NOT NULL,
 	"Nombre, Apellido"	TEXT,
-	"Cantidad Peliculas"	INTEGER DEFAULT 0,
+	"Cantidad Reservas"	INTEGER DEFAULT 0,
 	"Descuento"	INTEGER DEFAULT 0,
 	"Estado"	INTEGER DEFAULT 1,
 	PRIMARY KEY("id" AUTOINCREMENT)
