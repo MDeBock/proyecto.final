@@ -92,5 +92,6 @@ class Login:
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.iconbitmap(default="cinemark.ico")
     app = Login(root)
     root.mainloop()
