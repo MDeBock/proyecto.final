@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
-class App:
+class Login:
     def __init__(self, root):
         #setting title
         root.title("LOGIN")
