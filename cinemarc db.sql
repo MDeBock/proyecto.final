@@ -25,5 +25,6 @@ CREATE TABLE "sala" (
 	"Total Butacas"	INTEGER NOT NULL,
 	"Total vendidas"	INTEGER NOT NULL DEFAULT 0,
 	"Total reservadas"	INTEGER NOT NULL DEFAULT 0,
+	"Total disponibles"	INTEGER NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
