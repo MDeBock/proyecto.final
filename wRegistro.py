@@ -60,7 +60,7 @@ class Registro:
         GLineEdit_794["font"] = ft
         GLineEdit_794["fg"] = "#333333"
         GLineEdit_794["justify"] = "center"
-        GLineEdit_794["text"] = "Entry"
+        GLineEdit_794["text"] = ""
         GLineEdit_794.place(x=220,y=20,width=320,height=30)
 
         GLineEdit_522=tk.Entry(root)
@@ -69,7 +69,7 @@ class Registro:
         GLineEdit_522["font"] = ft
         GLineEdit_522["fg"] = "#333333"
         GLineEdit_522["justify"] = "center"
-        GLineEdit_522["text"] = "Entry"
+        GLineEdit_522["text"] = ""
         GLineEdit_522.place(x=220,y=60,width=320,height=30)
 
         GLineEdit_570=tk.Entry(root)
@@ -78,7 +78,7 @@ class Registro:
         GLineEdit_570["font"] = ft
         GLineEdit_570["fg"] = "#333333"
         GLineEdit_570["justify"] = "center"
-        GLineEdit_570["text"] = "Entry"
+        GLineEdit_570["text"] = ""
         GLineEdit_570.place(x=220,y=100,width=320,height=30)
 
         GLineEdit_690=tk.Entry(root)
@@ -87,7 +87,7 @@ class Registro:
         GLineEdit_690["font"] = ft
         GLineEdit_690["fg"] = "#333333"
         GLineEdit_690["justify"] = "center"
-        GLineEdit_690["text"] = "Entry"
+        GLineEdit_690["text"] = ""
         GLineEdit_690.place(x=220,y=140,width=320,height=30)
 
         GLineEdit_43=tk.Entry(root)
@@ -96,7 +96,7 @@ class Registro:
         GLineEdit_43["font"] = ft
         GLineEdit_43["fg"] = "#333333"
         GLineEdit_43["justify"] = "center"
-        GLineEdit_43["text"] = "Entry"
+        GLineEdit_43["text"] = ""
         GLineEdit_43.place(x=220,y=180,width=320,height=30)
         GLineEdit_43["show"] = "*"
 
@@ -106,7 +106,7 @@ class Registro:
         GLineEdit_210["font"] = ft
         GLineEdit_210["fg"] = "#333333"
         GLineEdit_210["justify"] = "center"
-        GLineEdit_210["text"] = "Entry"
+        GLineEdit_210["text"] = ""
         GLineEdit_210.place(x=220,y=220,width=320,height=30)
         GLineEdit_210["show"] = "*"
         
@@ -118,6 +118,16 @@ class Registro:
         GLabel_170["justify"] = "right"
         GLabel_170["text"] = "CONFIRMAR CONTRASEÑA"
         GLabel_170.place(x=0,y=220,width=200,height=30)
+        
+        GButton_71=tk.Button(root)
+        GButton_71["bg"] = "#f0f0f0"
+        ft = tkFont.Font(family='Times',size=10)
+        GButton_71["font"] = ft
+        GButton_71["fg"] = "#000000"
+        GButton_71["justify"] = "center"
+        GButton_71["text"] = "ACEPTAR"
+        GButton_71.place(x=220,y=260,width=150,height=30)
+        GButton_71["command"] = self.GButton_71_command
 
         GButton_271=tk.Button(root)
         GButton_271["bg"] = "#f0f0f0"
@@ -129,15 +139,7 @@ class Registro:
         GButton_271.place(x=390,y=260,width=150,height=30)
         GButton_271["command"] = self.GButton_271_command
 
-        GButton_71=tk.Button(root)
-        GButton_71["bg"] = "#f0f0f0"
-        ft = tkFont.Font(family='Times',size=10)
-        GButton_71["font"] = ft
-        GButton_71["fg"] = "#000000"
-        GButton_71["justify"] = "center"
-        GButton_71["text"] = "ACEPTAR"
-        GButton_71.place(x=220,y=260,width=150,height=30)
-        GButton_71["command"] = self.GButton_71_command
+
 
     def GButton_271_command(self):
         print("CANCELAR")
