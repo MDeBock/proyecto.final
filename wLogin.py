@@ -66,7 +66,7 @@ class Login:
         GLineEdit_134["font"] = ft
         GLineEdit_134["fg"] = "#333333"
         GLineEdit_134["justify"] = "center"
-        GLineEdit_134["text"] = "Entry"
+        GLineEdit_134["text"] = ""
         GLineEdit_134.place(x=120,y=20,width=320,height=30)
 
         GLineEdit_150=tk.Entry(root)
@@ -75,7 +75,7 @@ class Login:
         GLineEdit_150["font"] = ft
         GLineEdit_150["fg"] = "#333333"
         GLineEdit_150["justify"] = "center"
-        GLineEdit_150["text"] = "Entry"
+        GLineEdit_150["text"] = ""
         GLineEdit_150.place(x=120,y=60,width=320,height=30)
         GLineEdit_150["show"] = "*"
 
