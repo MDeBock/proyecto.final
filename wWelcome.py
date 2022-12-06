@@ -1,9 +1,12 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from wLogin import Login
 
 class Welcome:
     def __init__(self, root):
+        self.root = root
         #setting title
+        #root.title(title)
         root.title("WELCOME TO CINEMAR")
         #setting window size
         width=500
@@ -20,15 +23,20 @@ class Welcome:
         GButton_898["font"] = ft
         GButton_898["fg"] = "#000000"
         GButton_898["justify"] = "center"
-        GButton_898["text"] = "BIENVENIDOS A CINEMAR"       
+        GButton_898["text"] = "BIENVENIDOS A CINEMAR"
         GButton_898.place(x=0,y=0,width=500,height=100)
-        GButton_898["command"] = self.GButton_898_command
-
-    def GButton_898_command(self):
-        print("BIENVENIDOS A CINEMAR")
-
+        GButton_898["command"] = self.abrir_login
+        
+    def abrir_login(self):
+        Login(self.root)        
+    
 if __name__ == "__main__":
     root = tk.Tk()
     root.iconbitmap(default="cinemark.ico")
+    #project = "cinemar"
     app = Welcome(root)
+    #app = Welcome(root, project.capitalize())
     root.mainloop()
+    
+
+

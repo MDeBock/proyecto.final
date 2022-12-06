@@ -1,20 +1,26 @@
 import tkinter as tk
+import tkinter.ttk as ttk
 import tkinter.font as tkFont
+import tkinter.messagebox as tkMsgBox
+import bll.usuarios as user
+import bll.roles as rol
 
-class Registro:
-    def __init__(self, root):
+class Registro(tk.Toplevel):
+    def __init__(self, master = None, isAdmin = False, user_id = None):
+        super().__init__(master)
+        self.master = master
         #setting title
-        root.title("REGISTRO")
+        self.title("REGISTRO")
         #setting window size
         width=600
-        height=340
-        screenwidth = root.winfo_screenwidth()
-        screenheight = root.winfo_screenheight()
+        height=380
+        screenwidth = self.winfo_screenwidth()
+        screenheight = self.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
-        root.geometry(alignstr)
-        root.resizable(width=False, height=False)
+        self.geometry(alignstr)
+        self.resizable(width=False, height=False)
 
-        GLabel_692=tk.Label(root)
+        GLabel_692=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_692["font"] = ft
         GLabel_692["fg"] = "#333333"
@@ -22,7 +28,7 @@ class Registro:
         GLabel_692["text"] = "NOMBRE"
         GLabel_692.place(x=0,y=20,width=200,height=30)
 
-        GLabel_458=tk.Label(root)
+        GLabel_458=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_458["font"] = ft
         GLabel_458["fg"] = "#333333"
@@ -30,7 +36,7 @@ class Registro:
         GLabel_458["text"] = "APELLIDO"
         GLabel_458.place(x=0,y=60,width=200,height=30)
 
-        GLabel_338=tk.Label(root)
+        GLabel_338=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_338["font"] = ft
         GLabel_338["fg"] = "#333333"
@@ -38,7 +44,7 @@ class Registro:
         GLabel_338["text"] = "E-MAIL"
         GLabel_338.place(x=0,y=100,width=200,height=30)
 
-        GLabel_251=tk.Label(root)
+        GLabel_251=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_251["font"] = ft
         GLabel_251["fg"] = "#333333"
@@ -46,7 +52,7 @@ class Registro:
         GLabel_251["text"] = "USUARIO"
         GLabel_251.place(x=0,y=140,width=200,height=30)
 
-        GLabel_219=tk.Label(root)
+        GLabel_219=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_219["font"] = ft
         GLabel_219["fg"] = "#333333"
@@ -54,7 +60,7 @@ class Registro:
         GLabel_219["text"] = "CONTRASEÑA"
         GLabel_219.place(x=0,y=180,width=200,height=30)
 
-        GLineEdit_794=tk.Entry(root)
+        GLineEdit_794=tk.Entry(self)
         GLineEdit_794["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_794["font"] = ft
@@ -63,7 +69,7 @@ class Registro:
         GLineEdit_794["text"] = ""
         GLineEdit_794.place(x=220,y=20,width=320,height=30)
 
-        GLineEdit_522=tk.Entry(root)
+        GLineEdit_522=tk.Entry(self)
         GLineEdit_522["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_522["font"] = ft
@@ -72,7 +78,7 @@ class Registro:
         GLineEdit_522["text"] = ""
         GLineEdit_522.place(x=220,y=60,width=320,height=30)
 
-        GLineEdit_570=tk.Entry(root)
+        GLineEdit_570=tk.Entry(self)
         GLineEdit_570["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_570["font"] = ft
@@ -81,7 +87,7 @@ class Registro:
         GLineEdit_570["text"] = ""
         GLineEdit_570.place(x=220,y=100,width=320,height=30)
 
-        GLineEdit_690=tk.Entry(root)
+        GLineEdit_690=tk.Entry(self)
         GLineEdit_690["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_690["font"] = ft
@@ -90,7 +96,7 @@ class Registro:
         GLineEdit_690["text"] = ""
         GLineEdit_690.place(x=220,y=140,width=320,height=30)
 
-        GLineEdit_43=tk.Entry(root)
+        GLineEdit_43=tk.Entry(self)
         GLineEdit_43["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_43["font"] = ft
@@ -100,7 +106,7 @@ class Registro:
         GLineEdit_43.place(x=220,y=180,width=320,height=30)
         GLineEdit_43["show"] = "*"
 
-        GLineEdit_210=tk.Entry(root)
+        GLineEdit_210=tk.Entry(self)
         GLineEdit_210["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_210["font"] = ft
@@ -111,7 +117,7 @@ class Registro:
         GLineEdit_210["show"] = "*"
         
 
-        GLabel_170=tk.Label(root)
+        GLabel_170=tk.Label(self)
         ft = tkFont.Font(family='Times',size=10)
         GLabel_170["font"] = ft
         GLabel_170["fg"] = "#333333"
@@ -119,37 +125,54 @@ class Registro:
         GLabel_170["text"] = "CONFIRMAR CONTRASEÑA"
         GLabel_170.place(x=0,y=220,width=200,height=30)
         
-        GButton_71=tk.Button(root)
+        GLabel_975=tk.Label(self)
+        ft = tkFont.Font(family='Times',size=10)
+        GLabel_975["font"] = ft
+        GLabel_975["fg"] = "#333333"
+        GLabel_975["anchor"] = "right"
+        GLabel_975["text"] = "TIPO"
+        GLabel_975.place(x=0,y=260,width=320,height=30)
+        
+        roles = dict(rol.listar())
+        if isAdmin:
+            cb_roles = ttk.Combobox(self, state="readonly", values=list(roles.values()), name="cbRoles")
+        else:
+            cb_roles = ttk.Combobox(self, state="disabled", values=list(roles.values()), name="cbRoles")
+            cb_roles.set(roles[4])
+        cb_roles.place(x=220,y=260,width=320,height=30)
+        
+        GButton_71=tk.Button(self)
         GButton_71["bg"] = "#f0f0f0"
         ft = tkFont.Font(family='Times',size=10)
         GButton_71["font"] = ft
         GButton_71["fg"] = "#000000"
         GButton_71["justify"] = "center"
         GButton_71["text"] = "ACEPTAR"
-        GButton_71.place(x=220,y=260,width=150,height=30)
+        GButton_71.place(x=220,y=300,width=150,height=30)
         GButton_71["command"] = self.GButton_71_command
 
-        GButton_271=tk.Button(root)
+        GButton_271=tk.Button(self)
         GButton_271["bg"] = "#f0f0f0"
         ft = tkFont.Font(family='Times',size=10)
         GButton_271["font"] = ft
         GButton_271["fg"] = "#000000"
         GButton_271["justify"] = "center"
         GButton_271["text"] = "CANCELAR"
-        GButton_271.place(x=390,y=260,width=150,height=30)
-        GButton_271["command"] = self.GButton_271_command
+        GButton_271.place(x=390,y=300,width=150,height=30)
+        GButton_271["command"] = self.cancelar
+        
 
 
 
-    def GButton_271_command(self):
-        print("CANCELAR")
+    def cancelar(self):
+        self.destroy()
 
 
     def GButton_71_command(self):
         print("ACEPTAR")
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.iconbitmap(default="cinemark.ico")
-    app = Registro(root)
-    root.mainloop()
+# if __name__ == "__main__":
+#     self = tk.Tk()
+#     self.iconbitmap(default="cinemark.ico")
+#     app = Registro(self)
+#     self.mainloop()
