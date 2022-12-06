@@ -1,14 +1,12 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from wLogin import Login
+from dal.db import Db
 
 class Welcome:
     def __init__(self, root):
-        self.root = root
-        #setting title
-        #root.title(title)
-        root.title("WELCOME TO CINEMAR")
-        #setting window size
+        self.root = root        
+        root.title("WELCOME TO CINEMAR")        
         width=500
         height=100
         screenwidth = root.winfo_screenwidth()
@@ -31,11 +29,11 @@ class Welcome:
         Login(self.root)        
     
 if __name__ == "__main__":
+    Db.crear_tablas()
+    Db.poblar_tablas() 
     root = tk.Tk()
-    root.iconbitmap(default="cinemark.ico")
-    #project = "cinemar"
-    app = Welcome(root)
-    #app = Welcome(root, project.capitalize())
+    root.iconbitmap(default="cinemark.ico")    
+    app = Welcome(root)    
     root.mainloop()
     
 

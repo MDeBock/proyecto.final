@@ -1,20 +1,19 @@
 import tkinter as tk
 import tkinter.font as tkFont
-from wRegistro import Registro
 import tkinter.messagebox as tkMsgBox
+from wRegistro import Registro
 from wAdm import Adm
+import bll.usuarios as user
 
 class Login(tk.Toplevel):
     def __init__(self, master = None):
         super().__init__(master)
-        self.master = master
-        #setting title
-        self.title("LOGIN")
-        #setting window size
+        self.master = master        
+        self.title("LOGIN")        
         width=450
         height=170
-        screenwidth = self.winfo_screenwidth()
-        screenheight = self.winfo_screenheight()
+        screenwidth = master.winfo_screenwidth()
+        screenheight = master.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
@@ -35,15 +34,17 @@ class Login(tk.Toplevel):
         GLabel_886["text"] = "CONTRASEÑA"
         GLabel_886.place(x=0,y=60,width=100,height=30)
 
-        GButton_750=tk.Button(self)
-        GButton_750["bg"] = "#f0f0f0"
-        ft = tkFont.Font(family='Times',size=10)
-        GButton_750["font"] = ft
-        GButton_750["fg"] = "#000000"
-        GButton_750["justify"] = "center"
-        GButton_750["text"] = "REGISTRARSE"
-        GButton_750.place(x=10,y=120,width=100,height=30)
-        GButton_750["command"] = self.registro
+        
+        GButton_946=tk.Button(self)
+        GButton_946["bg"] = "#f0f0f0"
+        ft = tkFont.Font(family='Times',size=6, underline=True, weight='bold')
+        GButton_946["font"] = ft
+        GButton_946["fg"] = "#000000"
+        GButton_946["justify"] = "center"
+        GButton_946["text"] = "REGISTRARSE"
+        GButton_946.place(x=10,y=120,width=100,height=30)
+        GButton_946["command"] = self.registro
+        GButton_946["border"] = 0   
 
         GButton_630=tk.Button(self)
         GButton_630["bg"] = "#f0f0f0"
@@ -53,7 +54,7 @@ class Login(tk.Toplevel):
         GButton_630["justify"] = "center"
         GButton_630["text"] = "ENTRAR"
         GButton_630.place(x=200,y=120,width=100,height=30)
-        GButton_630["command"] = self.entrar #self.GButton_630_command
+        GButton_630["command"] = self.entrar 
 
         GButton_638=tk.Button(self)
         GButton_638["bg"] = "#f0f0f0"
@@ -84,25 +85,25 @@ class Login(tk.Toplevel):
         GLineEdit_150.place(x=120,y=60,width=320,height=30)
         GLineEdit_150["show"] = "*"
         
-    #TODO    
-    # def iniciar_sesion(self):
-    #     try:
-    #         txtUsuario = self.nametowidget("txtUsuario")
-    #         usuario = txtUsuario.get()            
+        
+    def iniciar_sesion(self):
+        try:
+            txtUsuario = self.nametowidget("txtUsuario")
+            usuario = txtUsuario.get()            
 
-    #         txtContrasenia = self.nametowidget("txtContrasenia")
-    #         contrasenia = txtContrasenia.get()
+            txtContrasenia = self.nametowidget("txtContrasenia")
+            contrasenia = txtContrasenia.get()
 
-    #         if usuario != "":
-    #             if user.validar(usuario, contrasenia):
-    #                 Dashboard(self.master)
-    #                 self.destroy()
-    #             else:
-    #                 tkMsgBox.showwarning(self.master.title(), "Usuario/Contraseña incorrecta")
-    #         else:
-    #             tkMsgBox.showwarning(self.master.title(), "Ingrese el Usuario para iniciar sesión")
-    #     except Exception as ex:
-    #         tkMsgBox.showerror(self.master.title(), str(ex))
+            if usuario != "":
+                if user.validar(usuario, contrasenia):
+                    Adm(self.master)
+                    self.destroy()
+                else:
+                    tkMsgBox.showwarning(self.master.title(), "Usuario/Contraseña incorrecta")
+            else:
+                tkMsgBox.showwarning(self.master.title(), "Ingrese el Usuario para iniciar sesión")
+        except Exception as ex:
+            tkMsgBox.showerror(self.master.title(), str(ex))
 
     def registro(self):
         Registro(self.master)
@@ -118,10 +119,6 @@ class Login(tk.Toplevel):
     def cancelar(self):
         self.destroy()
 
-# if __name__ == "__main__":
-#     self = tk.Tk()
-#     self.iconbitmap(default="cinemark.ico")
-#     app = Login(self)
-#     self.mainloop()
+
 
 

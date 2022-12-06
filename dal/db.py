@@ -2,7 +2,8 @@ import sqlite3
 from datetime import date
 import hashlib
 
-database = "super.db" # todo: por ahora ponemos el nombre de la base aqui, ver mejor opcion
+
+database = "CINEMAR.db" 
 
 class Db:
     @staticmethod
@@ -25,45 +26,55 @@ class Db:
     
     @staticmethod
     def crear_tablas():
-        sql_usuarios = '''CREATE TABLE IF NOT EXISTS "Usuarios" (
-                                "UsuarioId"	INTEGER NOT NULL,
-                                "Apellido"	VARCHAR(50),
-                                "Nombre"	VARCHAR(30),
-                                "FechaNacimiento"	VARCHAR(23),
-                                "Dni"	INTEGER,
-                                "CorreoElectronico"	VARCHAR(30),
-                                "Usuario"	VARCHAR(15) UNIQUE,
-                                "Contrasenia"	VARCHAR(100),
-                                "RolId"	INTEGER,
-                                "Activo"	INTEGER NOT NULL DEFAULT 1,
-                                PRIMARY KEY("UsuarioId" AUTOINCREMENT)
+        sql_user = '''CREATE TABLE IF NOT EXISTS "USUARIOS" (
+                                "ID"	INTEGER NOT NULL,
+                                "APELLIDO"	VARCHAR(50),
+                                "NOMBRE"	VARCHAR(30),                                
+                                "DNI"	INTEGER,
+                                "EMAIL"	VARCHAR(30),
+                                "USUARIO"	VARCHAR(15) UNIQUE,
+                                "CONTRASEÑA"	VARCHAR(100),
+                                "RID"	INTEGER,
+                                "ESTADO"	INTEGER NOT NULL DEFAULT 1,
+                                PRIMARY KEY("ID" AUTOINCREMENT)
                             );'''
-        sql_roles = '''CREATE TABLE IF NOT EXISTS "Roles" (
-                            "RolId"	INTEGER NOT NULL,
-                            "Nombre"	VARCHAR(30) NOT NULL UNIQUE,
-                            "Activo"	INTEGER NOT NULL DEFAULT 1,
-                            PRIMARY KEY("RolId")
+        sql_tipo = '''CREATE TABLE IF NOT EXISTS "TIPO" (
+                            "RID"	INTEGER NOT NULL,
+                            "NOMBRE"	VARCHAR(30) NOT NULL UNIQUE,
+                            "ESTADO"	INTEGER NOT NULL DEFAULT 1,
+                            PRIMARY KEY("RID")
                         );'''
 
-        tablas = {"Usuarios": sql_usuarios, "Roles": sql_roles}
+        tablas = {"USUARIOS": sql_user, "TIPO": sql_tipo}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()
             for tabla, sql in tablas.items():
                 print(f"Creando tabla {tabla}")
                 cursor.execute(sql)
-                # TODO agregar commit
+                
             
     @staticmethod
     def poblar_tablas():        
-        sql_roles = '''INSERT INTO Roles (RolId, Nombre) 
+        sql_tipo = '''INSERT INTO TIPO (RID, NOMBRE) 
                     VALUES 
-                        (1, "Administrador"),
-                        (2, "Supervisor"),
-                        (3, "Operador"),
-                        (4, "Cliente");'''
+                        (1, "ADMIN"),
+                        (2, "SELLER"),
+                        (3, "CLIENT");'''
 
-        tablas = {"Roles": sql_roles}
+        tablas = {"TIPO": sql_tipo}
+        
+        sql_tipo = '''INSERT INTO USUARIOS (APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) 
+                    VALUES                         
+                        ("SANCHEZ DE BOCK", 
+                        "MATIAS", 
+                        "31659877", 
+                        "TEST@TEST.COM", 
+                        "ADM", 
+                        "123", 
+                        "1");'''
+
+        tablas = {"USUARIOS": sql_tipo}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()
