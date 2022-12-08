@@ -1,11 +1,12 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from wLogin import Login
+from dal.db import Db
 
 class Welcome:
     def __init__(self, root):
-        #setting title
-        root.title("WELCOME TO CINEMAR")
-        #setting window size
+        self.root = root        
+        root.title("WELCOME TO CINEMAR")        
         width=500
         height=100
         screenwidth = root.winfo_screenwidth()
@@ -20,15 +21,20 @@ class Welcome:
         GButton_898["font"] = ft
         GButton_898["fg"] = "#000000"
         GButton_898["justify"] = "center"
-        GButton_898["text"] = "BIENVENIDOS A CINEMAR"       
+        GButton_898["text"] = "BIENVENIDOS A CINEMAR"
         GButton_898.place(x=0,y=0,width=500,height=100)
-        GButton_898["command"] = self.GButton_898_command
-
-    def GButton_898_command(self):
-        print("BIENVENIDOS A CINEMAR")
-
+        GButton_898["command"] = self.abrir_login
+        
+    def abrir_login(self):
+        Login(self.root)        
+    
 if __name__ == "__main__":
+    Db.crear_tablas()
+    Db.poblar_tablas() 
     root = tk.Tk()
-    root.iconbitmap(default="cinemark.ico")
-    app = Welcome(root)
+    root.iconbitmap(default="cinemark.ico")    
+    app = Welcome(root)    
     root.mainloop()
+    
+
+
