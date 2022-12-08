@@ -3,6 +3,8 @@ import tkinter.font as tkFont
 import tkinter.messagebox as tkMsgBox
 from wRegistro import Registro
 from wAdm import Adm
+from wSeller import Seller
+from wClient import Client
 import bll.usuarios as user
 
 class Login(tk.Toplevel):
@@ -66,7 +68,7 @@ class Login(tk.Toplevel):
         GButton_638.place(x=340,y=120,width=100,height=30)
         GButton_638["command"] = self.cancelar
 
-        GLineEdit_134=tk.Entry(self)
+        GLineEdit_134=tk.Entry(self, name="txtUsuario")
         GLineEdit_134["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_134["font"] = ft
@@ -75,7 +77,7 @@ class Login(tk.Toplevel):
         GLineEdit_134["text"] = ""
         GLineEdit_134.place(x=120,y=20,width=320,height=30)
 
-        GLineEdit_150=tk.Entry(self)
+        GLineEdit_150=tk.Entry(self, name="txtContrasenia")
         GLineEdit_150["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         GLineEdit_150["font"] = ft
@@ -86,7 +88,7 @@ class Login(tk.Toplevel):
         GLineEdit_150["show"] = "*"
         
         
-    def iniciar_sesion(self):
+    def entrar(self):
         try:
             txtUsuario = self.nametowidget("txtUsuario")
             usuario = txtUsuario.get()            
@@ -95,9 +97,17 @@ class Login(tk.Toplevel):
             contrasenia = txtContrasenia.get()
 
             if usuario != "":
-                if user.validar(usuario, contrasenia):
-                    Adm(self.master)
-                    self.destroy()
+                if user.validar(usuario, contrasenia):                                       
+                    if user.validarTipo(usuario, contrasenia) == 1:
+                        Adm(self.master)
+                        self.destroy()
+                    elif user.validarTipo(usuario, contrasenia) == 2:
+                        Seller(self.master)
+                        self.destroy()
+                    else:
+                        Client(self.master)
+                        self.destroy()
+                    
                 else:
                     tkMsgBox.showwarning(self.master.title(), "Usuario/Contraseña incorrecta")
             else:
@@ -107,15 +117,7 @@ class Login(tk.Toplevel):
 
     def registro(self):
         Registro(self.master)
-    
-    def entrar(self):
-        Adm(self.master)
-
-
-    def GButton_630_command(self):
-        print("ENTRAR")
-
-
+      
     def cancelar(self):
         self.destroy()
 

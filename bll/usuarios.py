@@ -1,7 +1,8 @@
 from dal.db import Db
 
+
 def agregar(apellido, nombre, dni, correo_electronico, usuario, contrasenia, rol_Id):    
-    sql = "INSERT INTO USUARIOS(APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) VALUES(?, ?, ?, ?, ?, ?, ?, ?);"
+    sql = "INSERT INTO USUARIOS(APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) VALUES(?, ?, ?, ?, ?, ?, ?);"
     parametros = (apellido, nombre, dni, correo_electronico, usuario, Db.encriptar_contraseña(contrasenia), rol_Id)
     Db.ejecutar(sql, parametros)
 
@@ -47,3 +48,11 @@ def existe(usuario):
     result = Db.consultar(sql, parametros, False)
     count = int(result[0])
     return count == 1
+
+def validarTipo(usuario, contrasenia):    
+    sql = "SELECT RID FROM USUARIOS WHERE USUARIO = ? AND CONTRASEÑA = ? AND ESTADO = 1;"
+    parametros = (usuario, Db.encriptar_contraseña(contrasenia))
+    result = Db.consultar(sql, parametros, False)    
+    return result[0]
+
+

@@ -38,14 +38,14 @@ class Db:
                                 "ESTADO"	INTEGER NOT NULL DEFAULT 1,
                                 PRIMARY KEY("ID" AUTOINCREMENT)
                             );'''
-        sql_tipo = '''CREATE TABLE IF NOT EXISTS "TIPO" (
+        sql_tipo = '''CREATE TABLE IF NOT EXISTS "TIPOS" (
                             "RID"	INTEGER NOT NULL,
                             "NOMBRE"	VARCHAR(30) NOT NULL UNIQUE,
                             "ESTADO"	INTEGER NOT NULL DEFAULT 1,
                             PRIMARY KEY("RID")
                         );'''
 
-        tablas = {"USUARIOS": sql_user, "TIPO": sql_tipo}
+        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()
@@ -56,15 +56,15 @@ class Db:
             
     @staticmethod
     def poblar_tablas():        
-        sql_tipo = '''INSERT INTO TIPO (RID, NOMBRE) 
+        sql_tipo = '''INSERT INTO TIPOS (RID, NOMBRE) 
                     VALUES 
                         (1, "ADMIN"),
                         (2, "SELLER"),
                         (3, "CLIENT");'''
 
-        tablas = {"TIPO": sql_tipo}
+        #tablas = {"TIPO": sql_tipo}
         
-        sql_tipo = '''INSERT INTO USUARIOS (APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) 
+        sql_user = '''INSERT INTO USUARIOS (APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) 
                     VALUES                         
                         ("SANCHEZ DE BOCK", 
                         "MATIAS", 
@@ -74,7 +74,7 @@ class Db:
                         "123", 
                         "1");'''
 
-        tablas = {"USUARIOS": sql_tipo}
+        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()

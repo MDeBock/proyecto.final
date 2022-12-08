@@ -8,14 +8,12 @@ import bll.TIPO as rol
 class Registro(tk.Toplevel):
     def __init__(self, master = None, isAdmin = False, user_id = None):
         super().__init__(master)
-        self.master = master
-        #setting title
-        self.title("REGISTRO")
-        #setting window size
+        self.master = master        
+        self.title("REGISTRO")        
         width=600
         height=380
-        screenwidth = self.winfo_screenwidth()
-        screenheight = self.winfo_screenheight()
+        screenwidth = master.winfo_screenwidth()
+        screenheight = master.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
@@ -94,7 +92,6 @@ class Registro(tk.Toplevel):
         GLineEdit_211["justify"] = "center"
         GLineEdit_211["text"] = ""
         GLineEdit_211.place(x=220,y=100,width=320,height=30)
-
 
         GLineEdit_570=tk.Entry(self, name="txtEmail")
         GLineEdit_570["borderwidth"] = "1px"
@@ -201,7 +198,7 @@ class Registro(tk.Toplevel):
             confirmacion = self.get_value("txtConfirmacion")
             rol_id = self.get_index("cbRoles")
 
-            # TODO validar los datos antes de ingresar
+            
             if not user.existe(usuario):
                 if contrasenia == confirmacion:                    
                     user.agregar(apellido, nombre, dni, email, usuario, contrasenia, rol_id)

@@ -1,20 +1,21 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
-class App:
-    def __init__(self, root):
-        #setting title
-        root.title("USER")
-        #setting window size
+
+class Client(tk.Toplevel):
+    def __init__(self, master = None):
+        super().__init__(master)
+        self.master = master        
+        self.title("USER")        
         width=240
         height=180
-        screenwidth = root.winfo_screenwidth()
-        screenheight = root.winfo_screenheight()
+        screenwidth = self.winfo_screenwidth()
+        screenheight = self.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
-        root.geometry(alignstr)
-        root.resizable(width=False, height=False)
+        self.geometry(alignstr)
+        self.resizable(width=False, height=False)
 
-        GButton_561=tk.Button(root)
+        GButton_561=tk.Button(self)
         GButton_561["bg"] = "#f0f0f0"
         ft = tkFont.Font(family='Times',size=10)
         GButton_561["font"] = ft
@@ -24,7 +25,7 @@ class App:
         GButton_561.place(x=20,y=20,width=200,height=30)
         GButton_561["command"] = self.GButton_561_command
 
-        GButton_269=tk.Button(root)
+        GButton_269=tk.Button(self)
         GButton_269["bg"] = "#f0f0f0"
         ft = tkFont.Font(family='Times',size=10)
         GButton_269["font"] = ft
@@ -34,7 +35,7 @@ class App:
         GButton_269.place(x=20,y=70,width=200,height=30)
         GButton_269["command"] = self.GButton_269_command
 
-        GButton_811=tk.Button(root)
+        GButton_811=tk.Button(self)
         GButton_811["bg"] = "#f0f0f0"
         ft = tkFont.Font(family='Times',size=10)
         GButton_811["font"] = ft
@@ -42,7 +43,7 @@ class App:
         GButton_811["justify"] = "center"
         GButton_811["text"] = "SALIR"
         GButton_811.place(x=20,y=120,width=200,height=30)
-        GButton_811["command"] = self.GButton_811_command
+        GButton_811["command"] = self.salir
 
     def GButton_561_command(self):
         print("command")
@@ -52,10 +53,6 @@ class App:
         print("command")
 
 
-    def GButton_811_command(self):
-        print("command")
+    def salir(self):
+        self.destroy()
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = App(root)
-    root.mainloop()

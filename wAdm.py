@@ -11,8 +11,8 @@ class Adm(tk.Toplevel):
         #setting window size
         width=240
         height=270
-        screenwidth = self.winfo_screenwidth()
-        screenheight = self.winfo_screenheight()
+        screenwidth = master.winfo_screenwidth()
+        screenheight = master.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         self.geometry(alignstr)
         self.resizable(width=False, height=False)
@@ -85,7 +85,4 @@ class Adm(tk.Toplevel):
     def salir(self):
         self.destroy()
 
-# if __name__ == "__main__":
-#     self = tk.Tk()
-#     app = App(self)
-#     self.mainloop()
+
