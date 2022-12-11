@@ -46,6 +46,15 @@ class Db:
                         "ESTADO"	INTEGER NOT NULL DEFAULT 1,
                         PRIMARY KEY("DID" AUTOINCREMENT)
                     );'''
+
+        sql_peliculas = '''CREATE TABLE IF NOT EXISTS "PELICULAS"(
+                        "PID"	INTEGER NOT NULL,
+                        "NOMBRE"	TEXT,
+                        "CLASID"	INTEGER NOT NULL,
+                        "GENERO"	TEXT,
+                        "ESTADO"	INTEGER,
+                        PRIMARY KEY("PID" AUTOINCREMENT)
+                     );''' 
                     
         sql_salas = '''CREATE TABLE IF NOT EXISTS "SALAS" (
                     "SID"	INTEGER NOT NULL,
@@ -70,10 +79,42 @@ class Db:
                             "ESTADO"	INTEGER NOT NULL DEFAULT 1,
                             PRIMARY KEY("RID")
                         );'''
-        
 
-        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo, "DESCUENTOS": sql_descuentos, 
-                  "SALAS": sql_salas, "CLASIFICACION": sql_clasificacion}
+        sql_tipo_peliculas = '''CREATE TABLE IF NOT EXISTS "TIPO_PELICULAS (
+                            "TPID"	INTEGER NOT NULL,
+                            "FORMATO"	TEXT,
+                            "IDIOMA"	TEXT NOT NULL,
+                            "SUBTITULADA"	TEXT,
+                            "ESTADO"	INTEGER,
+                            PRIMARY KEY("TPID" AUTOINCREMENT)
+                        );'''
+
+        sql_butacas = '''CREATE TABLE IF NOT EXISTS "BUTACAS" (
+                        "BID"	INTEGER NOT NULL,
+                        "FILA"	TEXT,
+                        "SILLA"	TEXT NOT NULL,
+                        "ESTADO"	TEXT NOT NULL DEFAULT 'LIBRE',
+                        "SID"	INTEGER NOT NULL,
+                        PRIMARY KEY("BID" AUTOINCREMENT)
+                    );'''
+                    
+        sql_horarios = '''CREATE TABLE IF NOT EXISTS "HORARIOS" (
+                        "HID"	INTEGER NOT NULL,
+                        "FECHA"	TEXT NOT NULL,
+                        "HORA"	TEXT NOT NULL,
+                        "ESTADO"	INTEGER NOT NULL,
+                        PRIMARY KEY("HID" AUTOINCREMENT)
+                    );'''        
+
+        tablas = {"USUARIOS": sql_user,
+                    "TIPOS": sql_tipo,
+                    "DESCUENTOS": sql_descuentos,
+                    "SALAS": sql_salas,
+                    "CLASIFICACION": sql_clasificacion,
+                    "PELICULAS": sql_peliculas,
+                    "TIPO_PELICULAS": sql_tipo_peliculas,
+                    "BUTACAS": sql_butacas,
+                    "HORARIOS": sql_horarios}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()
