@@ -80,7 +80,7 @@ class Db:
                             PRIMARY KEY("RID")
                         );'''
 
-        sql_tipo_peliculas = '''CREATE TABLE IF NOT EXISTS "TIPO_PELICULAS (
+        sql_tipo_peliculas = '''CREATE TABLE IF NOT EXISTS "TIPO_PELICULAS" (
                             "TPID"	INTEGER NOT NULL,
                             "FORMATO"	TEXT,
                             "IDIOMA"	TEXT NOT NULL,
