@@ -6,6 +6,7 @@ from wAdm import Adm
 from wSeller import Seller
 from wClient import Client
 import bll.usuarios as user
+from dal.db import Db
 
 class Login(tk.Toplevel):
     def __init__(self, master = None):
@@ -105,7 +106,7 @@ class Login(tk.Toplevel):
                         Seller(self.master)
                         self.destroy()
                     else:
-                        Client(self.master)
+                        Client(self.master, user_id=user.id_usuario(usuario)[0])                                                                     
                         self.destroy()
                     
                 else:

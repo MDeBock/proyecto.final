@@ -9,6 +9,11 @@ def agregar(apellido, nombre, dni, correo_electronico, usuario, contrasenia, rol
 def actualizar(id, apellido, nombre, dni, correo_electronico, contrasenia, rol_Id):    
     sql = "UPDATE USUARIOS SET APELLIDO = ?, NOMBRE = ?, DNI = ?, EMAIL = ?, CONTRASEÑA = ?, RID = ? WHERE ID = ? AND ESTADO = 1;"
     parametros = (apellido, nombre, dni, correo_electronico, Db.encriptar_contraseña(contrasenia), rol_Id, id)
+    Db.ejecutar(sql, parametros)
+
+def actualizar_noPass(id, apellido, nombre, dni, correo_electronico, rol_Id):    
+    sql = "UPDATE USUARIOS SET APELLIDO = ?, NOMBRE = ?, DNI = ?, EMAIL = ?, RID = ? WHERE ID = ? AND ESTADO = 1;"
+    parametros = (apellido, nombre, dni, correo_electronico, rol_Id, id)
     Db.ejecutar(sql, parametros)    
 
 def eliminar(id, logical = True):    
@@ -64,3 +69,10 @@ def obtener_id(id):
     result = Db.consultar(sql, parametros, False)    
     return result
 
+def id_usuario(usuario):
+    sql = '''SELECT ID
+            FROM USUARIOS             
+            WHERE USUARIO = ? AND ESTADO = 1;'''
+    parametros = (usuario,)
+    result = Db.consultar(sql, parametros, False)    
+    return result
