@@ -22,7 +22,7 @@ def eliminar(id, logical = True):
 def listar():
     sql = '''SELECT u.ID, u.APELLIDO, u.NOMBRE, u.DNI, u.EMAIL, u.USUARIO, u.RID, r.NOMBRE
             FROM USUARIOS u
-            INNER JOIN Roles r ON u.RID = r.RID
+            INNER JOIN TIPOS r ON u.RID = r.RID
             WHERE u.ESTADO = 1;'''
     result = Db.consultar(sql)
     return result
@@ -30,7 +30,7 @@ def listar():
 def filtrar(usuario):    
     sql = '''SELECT u.ID, u.APELLIDO, u.NOMBRE, u.DNI, u.EMAIL, u.USUARIO, u.RID, r.NOMBRE 
             FROM USUARIOS u
-            INNER JOIN Roles r ON u.RID = r.RID
+            INNER JOIN TIPOS r ON u.RID = r.RID
             WHERE u.USUARIO LIKE ? AND u.ESTADO = 1;'''    
     parametros = ('%{}%'.format(usuario),)    
     result = Db.consultar(sql, parametros)
@@ -55,4 +55,12 @@ def validarTipo(usuario, contrasenia):
     result = Db.consultar(sql, parametros, False)    
     return result[0]
 
+def obtener_id(id):
+    sql = '''SELECT u.ID, u.APELLIDO, u.NOMBRE, u.DNI, u.EMAIL, u.USUARIO, u.RID, r.NOMBRE
+            FROM USUARIOS u
+            INNER JOIN TIPOS r ON u.RID = r.RID
+            WHERE u.ID = ? AND u.ESTADO = 1;'''
+    parametros = (id,)
+    result = Db.consultar(sql, parametros, False)    
+    return result
 

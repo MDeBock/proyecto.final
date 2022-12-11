@@ -38,14 +38,42 @@ class Db:
                                 "ESTADO"	INTEGER NOT NULL DEFAULT 1,
                                 PRIMARY KEY("ID" AUTOINCREMENT)
                             );'''
+                            
+        sql_descuentos = '''CREATE TABLE IF NOT EXISTS "DESCUENTOS" (
+                        "DID"	INTEGER NOT NULL,
+                        "DIAS"	VARCHAR NOT NULL,
+                        "DESCUENTOS"	REAL NOT NULL,
+                        "ESTADO"	INTEGER NOT NULL DEFAULT 1,
+                        PRIMARY KEY("DID" AUTOINCREMENT)
+                    );'''
+                    
+        sql_salas = '''CREATE TABLE IF NOT EXISTS "SALAS" (
+                    "SID"	INTEGER NOT NULL,
+                    "Nº SALA"	INTEGER NOT NULL,
+                    "FORMATO"	TEXT NOT NULL,
+                    "CAPACIDAD"	INTEGER NOT NULL,
+                    "ESTADO"	INTEGER NOT NULL DEFAULT 1,
+                    PRIMARY KEY("SID" AUTOINCREMENT)
+                );'''
+                
+        sql_clasificacion = '''CREATE TABLE IF NOT EXISTS "CLASIFICACION" (
+                            "CLASID"	INTEGER NOT NULL,
+                            "IDENTIFICACION"	TEXT NOT NULL,
+                            "APTO"	TEXT NOT NULL,
+                            "DESCRIPCION"	TEXT NOT NULL,
+                            PRIMARY KEY("CLASID" AUTOINCREMENT)
+                        );'''
+        
         sql_tipo = '''CREATE TABLE IF NOT EXISTS "TIPOS" (
                             "RID"	INTEGER NOT NULL,
                             "NOMBRE"	VARCHAR(30) NOT NULL UNIQUE,
                             "ESTADO"	INTEGER NOT NULL DEFAULT 1,
                             PRIMARY KEY("RID")
                         );'''
+        
 
-        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo}
+        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo, "DESCUENTOS": sql_descuentos, 
+                  "SALAS": sql_salas, "CLASIFICACION": sql_clasificacion}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()
@@ -62,7 +90,22 @@ class Db:
                         (2, "SELLER"),
                         (3, "CLIENT");'''
 
-        #tablas = {"TIPO": sql_tipo}
+        sql_descuentos = '''INSERT INTO DESCUENTOS (DIAS, DESCUENTOS) 
+                        VALUES 
+                            ("LUNES", 0.2),
+                            ("MARTES", 0.15),
+                            ("MIERCOLES", 0.2),
+                            ("JUEVES", 0.15),
+                            ("VIERNES", 0.1),
+                            ("SABADO", 0.1),
+                            ("DOMINGO", 0.1);'''
+                            
+        sql_clasificacion = '''INSERT INTO CLASIFICACION (IDENTIFICACION, APTO, DESCRIPCION) 
+                        VALUES 
+                            ("A", "+ 18", "Violencia Extrema"),
+                            ("B", "+ 16", "Violencia Moderada"),
+                            ("C", "+ 13", "Violencia Leve"),
+                            ("D", "ATP", "Sin Violencia");'''
         
         sql_user = '''INSERT INTO USUARIOS (APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) 
                     VALUES                         
@@ -71,10 +114,11 @@ class Db:
                         "31659877", 
                         "TEST@TEST.COM", 
                         "ADM", 
-                        "123", 
+                        "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3", 
                         "1");'''
 
-        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo}
+        tablas = {"USUARIOS": sql_user, "TIPOS": sql_tipo, 
+                  "DESCUENTOS": sql_descuentos, "CLASIFICACION": sql_clasificacion}
 
         with sqlite3.connect(database) as cnn:
             cursor = cnn.cursor()

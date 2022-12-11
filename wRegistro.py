@@ -8,7 +8,8 @@ import bll.TIPO as rol
 class Registro(tk.Toplevel):
     def __init__(self, master = None, isAdmin = False, user_id = None):
         super().__init__(master)
-        self.master = master        
+        self.master = master
+        self.user_id = user_id        
         self.title("REGISTRO")        
         width=600
         height=380
@@ -175,6 +176,20 @@ class Registro(tk.Toplevel):
         GButton_271["text"] = "CANCELAR"
         GButton_271.place(x=390,y=340,width=150,height=30)
         GButton_271["command"] = self.cancelar
+        
+        if user_id is not None:
+            usuario = user.obtener_id(user_id)
+            if usuario is None:
+               tkMsgBox.showerror(self.master.title(), "Se produjo un error al obtener los datos del usuario, reintente nuevamente")
+               self.destroy()
+            else:                
+                GLineEdit_794.insert(0, usuario[1])
+                GLineEdit_522.insert(0, usuario[2])
+                GLineEdit_211.insert(0, usuario[3])
+                GLineEdit_570.insert(0, usuario[4])
+                GLineEdit_690.insert(0, usuario[5])
+                GLineEdit_690 ["state"] = "disabled"                              
+                cb_roles.set(usuario[7])
     
     def get_value(self, name):
         return self.nametowidget(name).get()
@@ -198,34 +213,30 @@ class Registro(tk.Toplevel):
             confirmacion = self.get_value("txtConfirmacion")
             rol_id = self.get_index("cbRoles")
 
-            
-            if not user.existe(usuario):
-                if contrasenia == confirmacion:                    
-                    user.agregar(apellido, nombre, dni, email, usuario, contrasenia, rol_id)
-                    tkMsgBox.showinfo(self.master.title(), "Registro agregado!!!!!!")                
-                    try:
-                        self.master.refrescar()
-                    except Exception as ex:
-                        print(ex)
-                    self.destroy()
+            if self.user_id is None:
+                if not user.existe(usuario):
+                    if contrasenia == confirmacion:                    
+                        user.agregar(apellido, nombre, dni, email, usuario, contrasenia, rol_id)
+                        tkMsgBox.showinfo(self.master.title(), "Registro agregado!!!!!!")                
+                        try:
+                            self.master.refrescar()
+                        except Exception as ex:
+                            print(ex)
+                        self.destroy()
+                    else:
+                        tkMsgBox.showwarning(self.master.title(), "Las contraseñas no coiciden")                 
                 else:
-                    tkMsgBox.showwarning(self.master.title(), "Las contraseñas no coiciden")                 
+                    tkMsgBox.showwarning(self.master.title(), "Usuario existente en nuestros registros")                
             else:
-                tkMsgBox.showwarning(self.master.title(), "Usuario existente en nuestros registros")
+                print("Actualizacion de usuario")
+                user.actualizar(self.user_id, apellido, nombre, dni, email, contrasenia, rol_id)  # TODO ver el tema de la contraseña
+                tkMsgBox.showinfo(self.master.title(), "Registro modificado!!!!!!")                
+                self.master.refrescar()
+                self.destroy()      
+                
+                
         except Exception as ex:
             tkMsgBox.showerror(self.master.title(), str(ex))
             
-            if not user.existe(usuario):
-                user.agregar(apellido, nombre, dni, email, usuario, contrasenia, rol_id)
-                tkMsgBox.showinfo(self.master.title(), "Registro agregado!!!!!!")                
-                try:
-                    self.master.refrescar()
-                except Exception as ex:
-                    print(ex)
-                self.destroy()                
-            else:
-                tkMsgBox.showwarning(self.master.title(), "Usuario existente en nuestros registros")
-        except Exception as ex:
-            tkMsgBox.showerror(self.master.title(), str(ex))
-
+            
 
