@@ -207,28 +207,19 @@ class Perfil(tk.Toplevel):
             contrasenia = self.get_value("txtContraseña")            
             confirmacion = self.get_value("txtConfirmacion")
             rol_id = self.get_index("cbRoles")
-
-            if self.user_id is None:                
-                if contrasenia == confirmacion:                    
-                    user.agregar(apellido, nombre, dni, email, usuario, contrasenia, rol_id)
-                    tkMsgBox.showinfo(self.master.title(), "Registro agregado!!!!!!")                
-                    try:
-                        self.master.refrescar()
-                    except Exception as ex:
-                        print(ex)
-                    self.destroy()
-                else:
-                    tkMsgBox.showwarning(self.master.title(), "Las contraseñas no coiciden")                                
-            else:
-                print("Actualizacion de usuario")
-                if contrasenia != "":
+            
+            print("Actualizacion de usuario")
+            if contrasenia != "":
+                if contrasenia == confirmacion:                        
                     user.actualizar(self.user_id, apellido, nombre, dni, email, contrasenia, rol_id) 
                     tkMsgBox.showinfo(self.master.title(), "Registro modificado!!!!!!")                
                     self.destroy()
                 else:
-                    user.actualizar_noPass(self.user_id, apellido, nombre, dni, email, rol_id) 
-                    tkMsgBox.showinfo(self.master.title(), "Registro modificado!!!!!!")                
-                    self.destroy()          
+                    tkMsgBox.showwarning(self.master.title(), "Las contraseñas no coiciden")
+            else:
+                user.actualizar_noPass(self.user_id, apellido, nombre, dni, email, rol_id) 
+                tkMsgBox.showinfo(self.master.title(), "Registro modificado!!!!!!")                
+                self.destroy()          
                 
         except Exception as ex:
             tkMsgBox.showerror(self.master.title(), str(ex))
