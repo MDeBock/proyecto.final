@@ -5,7 +5,6 @@ import tkinter.messagebox as tkMsgBox
 import bll.Descuentos as desc
 from wDescuentos import Descuento
 
-# TODO editar para descuentos
 
 class Dcrud(Toplevel):
     def __init__(self, master=None):
