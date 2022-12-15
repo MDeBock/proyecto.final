@@ -3,10 +3,11 @@ import tkinter.font as tkFont
 from wRegistro import Registro
 from wUserCRUD import Ucrud
 from wDescuentosCRUD import Dcrud
+from wHorario import Horario
 
 class Adm(tk.Toplevel):
-    def __init__(self, master = None):
-        super().__init__(master)
+    def _init_(self, master = None):
+        super()._init_(master)
         self.master = master
         #setting title
         self.title("ADMIN")
@@ -25,9 +26,9 @@ class Adm(tk.Toplevel):
         GButton_723["font"] = ft
         GButton_723["fg"] = "#000000"
         GButton_723["justify"] = "center"
-        GButton_723["text"] = "RESERVAS"
+        GButton_723["text"] = "HORARIO"
         GButton_723.place(x=20,y=20,width=200,height=30)
-        GButton_723["command"] = self.GButton_723_command
+        GButton_723["command"] = self.horarios
 
         GButton_500=tk.Button(self)
         GButton_500["bg"] = "#f0f0f0"
@@ -69,8 +70,8 @@ class Adm(tk.Toplevel):
         GButton_724.place(x=20,y=220,width=200,height=30)
         GButton_724["command"] = self.salir
         
-    def GButton_723_command(self):
-        print("RESERVAS")
+    def horarios(self):
+        Horario(self)
 
 
     def GButton_500_command(self):
@@ -92,5 +93,3 @@ class Adm(tk.Toplevel):
     
     def abrir_descuentos(self):
         Dcrud(self)
-
-
