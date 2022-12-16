@@ -6,8 +6,8 @@ from wDescuentosCRUD import Dcrud
 from wHorario import Horario
 
 class Adm(tk.Toplevel):
-    def _init_(self, master = None):
-        super()._init_(master)
+    def __init__(self, master = None):
+        super().__init__(master)
         self.master = master
         #setting title
         self.title("ADMIN")
