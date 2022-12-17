@@ -14,7 +14,7 @@ class Horario(tk.Toplevel):
         self.h_id = h_id        
         self.title("FUNCIONES")        
         width=600
-        height=380
+        height=220
         screenwidth = master.winfo_screenwidth()
         screenheight = master.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
@@ -86,7 +86,7 @@ class Horario(tk.Toplevel):
         GButton_71["fg"] = "#000000"
         GButton_71["justify"] = "center"
         GButton_71["text"] = "ACEPTAR"
-        GButton_71.place(x=220,y=340,width=150,height=30)
+        GButton_71.place(x=220,y=180,width=150,height=30)
         GButton_71["command"] = self.aceptar
         
         GButton_271=tk.Button(self)
@@ -96,7 +96,7 @@ class Horario(tk.Toplevel):
         GButton_271["fg"] = "#000000"
         GButton_271["justify"] = "center"
         GButton_271["text"] = "CANCELAR"
-        GButton_271.place(x=390,y=340,width=150,height=30)
+        GButton_271.place(x=390,y=180,width=150,height=30)
         GButton_271["command"] = self.cancelar
         
         if h_id is not None:
