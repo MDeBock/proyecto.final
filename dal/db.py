@@ -154,13 +154,27 @@ class Db:
         
         sql_user = '''INSERT INTO USUARIOS (APELLIDO, NOMBRE, DNI, EMAIL, USUARIO, CONTRASEÑA, RID) 
                     VALUES                         
-                        ("SANCHEZ DE BOCK", 
-                        "MATIAS", 
-                        "31659877", 
-                        "TEST@TEST.COM", 
+                        ("ADM", 
+                        "ADM", 
+                        "12345678", 
+                        "ADM@TEST.COM", 
                         "ADM", 
                         "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3", 
-                        "1");'''
+                        "1"),
+                        ("VTA", 
+                        "VTA", 
+                        "12345678", 
+                        "VTA@TEST.COM", 
+                        "VTA", 
+                        "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3", 
+                        "2"),
+                        ("USER", 
+                        "USER", 
+                        "12345678", 
+                        "USER@TEST.COM", 
+                        "USER", 
+                        "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3", 
+                        "3");'''
                         
         sql_salas = '''INSERT INTO SALAS (N_SALA, FORMATO, CAPACIDAD) 
                     VALUES 
