@@ -96,11 +96,9 @@ class Hcrud(Toplevel):
         Horario(self)
 
     def editar(self):
-        print(self.select_id) 
         Horario(self, self.select_id)
 
     def eliminar(self):
-        print(self.select_id)
         answer =  tkMsgBox.askokcancel(self.title(), "¿Está seguro de eliminar esta Funcion?")   
         if answer:
             hor.eliminar(self.select_id)
