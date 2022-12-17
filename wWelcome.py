@@ -32,7 +32,7 @@ if __name__ == "__main__":
     Db.crear_tablas()
     Db.poblar_tablas() 
     root = tk.Tk()
-    root.iconbitmap(default="cinemark.ico")    
+    root.iconbitmap(default="video_reel.ico")    
     app = Welcome(root)    
     root.mainloop()
     
