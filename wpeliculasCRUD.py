@@ -2,16 +2,15 @@ from tkinter import *
 import tkinter.font as tkFont
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkMsgBox
-import bll.Descuentos as desc
-from wDescuentos import Descuento
+import bll.Peliculas as peli
+from wpelicula import Pelicula
 
-
-class Dcrud(Toplevel):
+class Pcrud(Toplevel):
     def __init__(self, master=None):
         super().__init__(master)        
         self.master = master
         self.select_id = -1        
-        self.title("DESCUENTOS")        
+        self.title("PELICULAS")        
         width=800
         height=400
         screenwidth = self.winfo_screenwidth()
@@ -25,17 +24,23 @@ class Dcrud(Toplevel):
         GLabel_464["font"] = ft
         GLabel_464["fg"] = "#333333"
         GLabel_464["justify"] = "center"
-        GLabel_464["text"] = "DESCUENTOS"
+        GLabel_464["text"] = "PELICULAS"
         GLabel_464.place(x= 300,y=10,width=200,height=40)
 
-        tv = ttk.Treeview(self, columns=("DIAS", "DESCUENTOS"), name="tvDescuentos")
-        tv.column("#0", width=78)
-        tv.column("DIAS", width=150, anchor=CENTER)
-        tv.column("DESCUENTOS", width=150, anchor=CENTER)
-                
+        tv = ttk.Treeview(self, columns=("NOMBRE", "GENERO", "DURACION", "APTO", "PRECIO" ), name="tvPeliculas")
+        tv.column("#0", width=50)
+        tv.column("NOMBRE", width=250, anchor=CENTER)
+        tv.column("GENERO", width=100, anchor=CENTER)
+        tv.column("DURACION", width=100, anchor=CENTER)
+        tv.column("APTO", width=100, anchor=CENTER)
+        tv.column("PRECIO", width=100, anchor=CENTER)
+        
         tv.heading("#0", text="ID", anchor=CENTER)
-        tv.heading("DIAS", text="DIAS", anchor=CENTER)
-        tv.heading("DESCUENTOS", text="DESCUENTOS", anchor=CENTER)            
+        tv.heading("NOMBRE", text="NOMBRE", anchor=CENTER)
+        tv.heading("GENERO", text="GENERO", anchor=CENTER)
+        tv.heading("DURACION", text="DURACION", anchor=CENTER)
+        tv.heading("APTO", text="APTO", anchor=CENTER)
+        tv.heading("PRECIO", text="PRECIO", anchor=CENTER)     
         tv.bind("<<TreeviewSelect>>", self.obtener_fila)
         tv.place(x=10,y=50,width=780,height=300)          
         
@@ -47,7 +52,7 @@ class Dcrud(Toplevel):
         btn_agregar["font"] = ft
         btn_agregar["fg"] = "#000000"
         btn_agregar["justify"] = "center"
-        btn_agregar["text"] = "NUEVO"
+        btn_agregar["text"] = "NUEVA"
         btn_agregar.place(x=360,y=360,width=100,height=30)
         btn_agregar["command"] = self.agregar
 
@@ -79,33 +84,33 @@ class Dcrud(Toplevel):
         btn_salir["command"] = self.salir
         
     def obtener_fila(self, event):
-        tvDescuentos = self.nametowidget("tvDescuentos")
-        current_item = tvDescuentos.focus()
+        tvPeliculas = self.nametowidget("tvPeliculas")
+        current_item = tvPeliculas.focus()
         if current_item:
-            data = tvDescuentos.item(current_item)
+            data = tvPeliculas.item(current_item)
             self.select_id = int(data["text"])
         else:
             self.select_id = -1
 
     def agregar(self):
-        Descuento(self)
+        Pelicula(self)
 
     def editar(self): 
-        Descuento(self, self.select_id)
+        Pelicula(self, self.select_id)
 
     def eliminar(self):
-        answer =  tkMsgBox.askokcancel(self.title(), "¿Está seguro de eliminar este descuento?")   
+        answer =  tkMsgBox.askokcancel(self.title(), "¿Está seguro de eliminar esta Pelicula?")   
         if answer:
-            desc.eliminar(self.select_id)
+            peli.eliminar(self.select_id)
             self.refrescar()
             
     def salir(self):
         self.destroy()
     
     def refrescar(self):        
-        tvDescuentos = self.nametowidget("tvDescuentos")
-        for record in tvDescuentos.get_children():
-            tvDescuentos.delete(record)
-        descuentos = desc.listar()
-        for descuento in descuentos:
-            tvDescuentos.insert("", END, text=descuento[0], values=(descuento[1], descuento[2])) 
+        tvPeliculas = self.nametowidget("tvPeliculas")
+        for record in tvPeliculas.get_children():
+            tvPeliculas.delete(record)
+        peliculas = peli.listar()
+        for movie in peliculas:
+            tvPeliculas.insert("", END, text=movie[0], values=(movie[1], movie[2], movie[3], movie[4], movie[5])) 

@@ -22,7 +22,8 @@ def eliminar(id, logical = True):
 
 def listar():
     sql = '''SELECT DID, DIAS, DESCUENTOS, ESTADO
-            FROM DESCUENTOS;'''
+            FROM DESCUENTOS
+            WHERE ESTADO = 1;'''
     result = Db.consultar(sql)
     return result
 
