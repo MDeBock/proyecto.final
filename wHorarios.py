@@ -5,7 +5,7 @@ import tkinter.messagebox as tkMsgBox
 import bll.horarios as hor
 import bll.Peliculas as Peliculas
 import bll.Salas as Salas
-
+from datetime import datetime
 
 class Horario(tk.Toplevel):
     def __init__(self, master = None, h_id = None):
@@ -127,7 +127,22 @@ class Horario(tk.Toplevel):
             hora = self.get_value("txtHora")
             pelicula = self.get_value("cbPelicula") 
             sala = self.get_value("cbSala")
-            
+
+           # fechaac=datetime()
+                    
+            if fecha =="":
+                tkMsgBox.showerror(self.master.title(), "Fecha es un valor requerido.")
+                return
+            if hora =="":
+                tkMsgBox.showerror(self.master.title(), "Hora es un valor requerido.")
+                return
+            if pelicula =="":
+                tkMsgBox.showerror(self.master.title(), "Película es un valor requerido.")
+                return
+            if sala =="":
+                tkMsgBox.showerror(self.master.title(), "Sala es un valor requerido.")
+                return
+
             if self.h_id is None:           
                 hor.agregar(fecha, hora, pelicula, sala)
                 tkMsgBox.showinfo(self.master.title(), "Funcion agregada!!!!!!")                

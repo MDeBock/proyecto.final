@@ -213,6 +213,32 @@ class Registro(tk.Toplevel):
             confirmacion = self.get_value("txtConfirmacion")
             rol_id = self.get_index("cbRoles")
 
+            if apellido =="":
+                tkMsgBox.showerror(self.master.title(), "Apellido es un valor requerido.")
+                return
+            if nombre =="":
+                tkMsgBox.showerror(self.master.title(), "Nombre es un valor requerido.")
+                return
+            if dni =="":
+                tkMsgBox.showerror(self.master.title(), "Dni es un valor requerido.")
+                return
+            if email =="":
+                tkMsgBox.showerror(self.master.title(), "Email es un valor requerido.")
+                return
+            if usuario =="":
+                tkMsgBox.showerror(self.master.title(), "Usuario es un valor requerido.")
+                return
+            if contrasenia =="":
+                tkMsgBox.showerror(self.master.title(), "Contraseña es un valor requerido.")
+                return
+            if confirmacion =="":
+                tkMsgBox.showerror(self.master.title(), "Confirmacion es un valor requerido.")
+                return
+            if rol_id =="":
+                tkMsgBox.showerror(self.master.title(), "Rol es un valor requerido.")
+                return
+                
+
             if self.user_id is None:
                 if not user.existe(usuario):
                     if contrasenia == confirmacion:                    

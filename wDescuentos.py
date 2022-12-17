@@ -100,7 +100,14 @@ class Descuento(tk.Toplevel):
         try:            
             dias = self.get_value("txtDia")
             descuento = self.get_value("txtDescuento")                        
-                
+
+            if dias =="":
+                tkMsgBox.showerror(self.master.title(), "Días es un valor requerido.")
+                return
+            if descuento =="":
+                tkMsgBox.showerror(self.master.title(), "Descuento es un valor requerido.")
+                return
+
             if self.desc_id is None:                                  
                 FDescuentos.agregar(dias, descuento)
                 tkMsgBox.showinfo(self.master.title(), "Descuento agregado!!!!!!")                

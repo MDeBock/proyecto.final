@@ -159,7 +159,22 @@ class Pelicula(tk.Toplevel):
             genero = self.get_value("txtGenero")
             precio = self.get_value("txtPrecio")
             duracion = self.get_value("txtDuracion")
-                                   
+
+            if nombre =="":
+                tkMsgBox.showerror(self.master.title(), "Nombre es un valor requerido.")
+                return 
+            if clasid =="":
+                tkMsgBox.showerror(self.master.title(), "Clasificación es un valor requerido.")
+                return  
+            if genero =="":
+                tkMsgBox.showerror(self.master.title(), "Genero es un valor requerido.")
+                return  
+            if precio =="":
+                tkMsgBox.showerror(self.master.title(), "Precio es un valor requerido.")
+                return 
+            if duracion =="":
+                tkMsgBox.showerror(self.master.title(), "Duración es un valor requerido.")
+                return
                 
             if self.peli_id is None:                                  
                 FPeliculas.agregar(nombre, clasid, genero, precio, duracion)

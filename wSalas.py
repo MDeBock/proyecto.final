@@ -118,7 +118,17 @@ class Sala(tk.Toplevel):
         try:            
             nSala = self.get_value("txtNº_sala")
             formato = self.get_value("txtFormato")
-            capacidad = self.get_value("txtCapacidad")                        
+            capacidad = self.get_value("txtCapacidad")
+
+            if nSala =="":
+                tkMsgBox.showerror(self.master.title(), "Sala es un valor requerido.")
+                return
+            if formato =="":
+                tkMsgBox.showerror(self.master.title(), "Formato es un valor requerido.")
+                return 
+            if capacidad =="":
+                tkMsgBox.showerror(self.master.title(), "Capacidad es un valor requerido.")
+                return                        
                 
             if self.sala_id is None:                                  
                 FSalas.agregar(nSala, formato, capacidad)
